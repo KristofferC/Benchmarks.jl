@@ -98,6 +98,7 @@ macro benchmarkable(name, setup, core, teardown)
         function $(benchfn)(s::Samples, nsamples, nevals, $(args...))
             # Execute the setup expression exactly once
             $(esc(setup))
+            gc()
 
             # Generate n_samples by evaluating the core
             for _ in 1:nsamples
